@@ -1,0 +1,11 @@
+Bottom: d22334bfbdb8b27c8a2b7e6c46db994cd233eb3e
+Top:    d22334bfbdb8b27c8a2b7e6c46db994cd233eb3e
+Author: scott snyder <sss@karma>
+Date:   2020-02-12 08:45:25 -0500
+
+Don't override installation path.
+
+
+---
+
+
