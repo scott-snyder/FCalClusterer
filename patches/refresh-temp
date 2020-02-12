@@ -1,0 +1,196 @@
+Bottom: b4048b8ab039c7efc9247a3286ea262b2dc1433f
+Top:    d22334bfbdb8b27c8a2b7e6c46db994cd233eb3e
+Author: scott snyder <sss@karma>
+Date:   2020-02-12 08:45:00 -0500
+
+Refresh of warn
+
+---
+
+diff --git a/source/BeamCalReco/src/BeamCal.cpp b/source/BeamCalReco/src/BeamCal.cpp
+index d308ed1..25ddd48 100644
+--- a/source/BeamCalReco/src/BeamCal.cpp
++++ b/source/BeamCalReco/src/BeamCal.cpp
+@@ -327,7 +327,7 @@ void BeamCal::DrawPhiDistributions(TPad *pad, Int_t layer, Option_t* options){
+     Double_t extents[6];
+     this->m_BCG.getPadExtents(i, 1, extents);
+     if( not (extents[0] > this->m_BCG.getCutout()) ){
+-#pragma message "FixMe number of bins in drawphidistributions"
++//#pragma message "FixMe number of bins in drawphidistributions"
+       //calculate bins for the limited range
+       const double degreesDeadAngle = m_BCG.getDeadAngle()*TMath::RadToDeg();
+       double limitedBinSize =  (360.0-degreesDeadAngle) / double(m_BCG.getPadsInRing(i));
+diff --git a/source/BeamCalReco/src/BeamCalGeoCached.cpp b/source/BeamCalReco/src/BeamCalGeoCached.cpp
+index 0e6fd31..b9b12a5 100644
+--- a/source/BeamCalReco/src/BeamCalGeoCached.cpp
++++ b/source/BeamCalReco/src/BeamCalGeoCached.cpp
+@@ -97,7 +97,7 @@ inline double                BeamCalGeoCached::getBCZDistanceToIP() const {
+ 
+ 
+ inline double                BeamCalGeoCached::getLayerZDistanceToIP(int layer) const {
+-#pragma message "FIXME: make thickness of graphite shield to be read from GEAR"
++//#pragma message "FIXME: make thickness of graphite shield to be read from GEAR"
+   const double graphiteShield_dZ = 100.;
+   double lr_zdist(graphiteShield_dZ);
+   lr_zdist+=m_BCPs.getLayerLayout().getDistance(layer);
+@@ -116,6 +116,7 @@ void BeamCalGeoCached::setPadsInRing()  {
+   }//for all rings
+ }//setPadsRings
+ 
++
+ inline int BeamCalGeoCached::getPadsBeforeRing( int ring ) const {
+   //  std::cout << "Ring " << ring << " val " << m_padsBeforeRing[ring]  << std::endl;
+   return m_padsBeforeRing[ring];
+@@ -126,7 +127,7 @@ void BeamCalGeoCached::setPadsBeforeRing() {
+   int nPads = 0;
+   for (int ring = 0; ring <= m_rings; ++ring) {//we want the number of pads _before_ the ring
+     m_padsBeforeRing[ring] = nPads;
+-    nPads += getPadsInRing(ring);
++    nPads += m_padsPerRing[ring];
+   }
+   return;
+ }
+@@ -143,12 +144,12 @@ inline int BeamCalGeoCached::getPadsPerBeamCal() const {
+ 
+ 
+ void BeamCalGeoCached::setPadsPerLayer() {
+-  m_padsPerLayer = getPadsBeforeRing( getBCRings() );
++  m_padsPerLayer = m_padsBeforeRing[m_rings];
+ }
+ 
+ 
+ void BeamCalGeoCached::setPadsPerBeamCal() {
+-  m_padsPerBeamCal = getPadsPerLayer() * getBCLayers();
++  m_padsPerBeamCal = m_padsPerLayer * m_layers;
+ }
+ 
+ 
+@@ -173,6 +174,6 @@ int BeamCalGeoCached::getFirstFullRing() const {
+ 
+ void BeamCalGeoCached::setFirstFullRing() {
+   int ring = 0;
+-  while ( m_cutOut > getRadSegmentation()[ring] ) { ++ring; }
++  while ( m_cutOut > m_radSegmentation[ring] ) { ++ring; }
+   m_firstFullRing = ring;
+ }
+diff --git a/source/BeamCalReco/src/BeamCalGeoDD.cpp b/source/BeamCalReco/src/BeamCalGeoDD.cpp
+index fb31244..cfd8ab1 100644
+--- a/source/BeamCalReco/src/BeamCalGeoDD.cpp
++++ b/source/BeamCalReco/src/BeamCalGeoDD.cpp
+@@ -313,7 +313,7 @@ void BeamCalGeoDD::readPolarGridRPhi() {
+   m_rings = int((m_outerRadius - m_innerRadius) / rSize + 0.5);
+   m_radSegmentation.resize(m_rings + 1);  //inner and outer radius are part of this
+   int n = -1;
+-  std::generate(m_radSegmentation.begin(), m_radSegmentation.end(), [n, this, rSize, rOff]() mutable {
++  std::generate(m_radSegmentation.begin(), m_radSegmentation.end(), [n, rSize, rOff]() mutable {
+     ++n;
+     return rOff + rSize * (n - 0.5);
+   });
+diff --git a/source/LumiCalReco/src/LumiCalClusterer_buildClusters.cpp b/source/LumiCalReco/src/LumiCalClusterer_buildClusters.cpp
+index 36af994..47ad717 100644
+--- a/source/LumiCalReco/src/LumiCalClusterer_buildClusters.cpp
++++ b/source/LumiCalReco/src/LumiCalClusterer_buildClusters.cpp
+@@ -354,7 +354,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
+ 	// update the multi-layer CM position
+ 	//APS: BUGFIX This used to have the CM2 from the clusterNow2 loop above, instead of closestCluster
+ 	avrgCM[closestCluster->first].addToEnergy(thisCluster.getE());
+-#pragma message( "(BP) temporary fix, need modify cluster CM method " )
++//#pragma message( "(BP) temporary fix, need modify cluster CM method " )
+ 	// 
+ 	double wt_closest = avrgCM[closestCluster->first].getWeight();
+ 	double wt_this = thisCluster.getWeight();
+@@ -385,7 +385,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
+   streamlog_out(DEBUG3) <<  "Fit Param should be this size: " <<  engyPosCMLayer.size()  << std::endl;
+ #endif
+ 
+-  TF1 fitFunc("fitFunc",[](double* x, double* p){ return p[0] + p[1]*x[0]; },-3000,-2000, 2);
++  auto fitFunc = std::make_unique<TF1>("fitFunc",[](double* x, double* p){ return p[0] + p[1]*x[0]; },-3000,-2000, 2);
+ 
+   //  for(size_t clusterNow=0; clusterNow < engyPosCMLayer.size(); clusterNow++, engyPosCMLayerIterator++) {
+   for(engyPosCMLayerIterator = engyPosCMLayer.begin(); engyPosCMLayerIterator != engyPosCMLayer.end(); engyPosCMLayerIterator++) {
+@@ -468,24 +468,24 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
+     // fit a straight line for each histogram, and store the fit results
+     xLineFitCM[clusterNow].Fit("fitFunc","+CQ0");
+     fitParamX.push_back(std::vector<double>(2,0.0));
+-    fitParamX.back()[0] = fitFunc.GetParameter(0);
+-    fitParamX.back()[1] = fitFunc.GetParameter(1);
++    fitParamX.back()[0] = fitFunc->GetParameter(0);
++    fitParamX.back()[1] = fitFunc->GetParameter(1);
+ 
+ #if _CLUSTER_BUILD_DEBUG == 1
+     streamlog_out(DEBUG3) << "\t -> xFitPar 0,1:  "
+-                          << fitFunc.GetParameter(0) << " (+-) " << fitFunc.GetParError(0)
+-                          << " \t,\t " << fitFunc.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl;
++                          << fitFunc->GetParameter(0) << " (+-) " << fitFunc->GetParError(0)
++                          << " \t,\t " << fitFunc->GetParameter(1) << " (+-) " << fitFunc->GetParError(1) <<std::endl;
+ #endif
+ 
+     yLineFitCM[clusterNow] . Fit("fitFunc","+CQ0");
+     fitParamY.push_back(std::vector<double>(2,0.0));
+-    fitParamY.back()[0] = fitFunc.GetParameter(0);
+-    fitParamY.back()[1] = fitFunc.GetParameter(1);
++    fitParamY.back()[0] = fitFunc->GetParameter(0);
++    fitParamY.back()[1] = fitFunc->GetParameter(1);
+ 
+ #if _CLUSTER_BUILD_DEBUG == 1
+     streamlog_out(DEBUG3) << "\t -> yFitPar 0,1:  "
+-                          << fitFunc.GetParameter(0) << " (+-) " << fitFunc.GetParError(0)
+-                          << " \t,\t " << fitFunc.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl <<std::endl;
++                          << fitFunc->GetParameter(0) << " (+-) " << fitFunc->GetParError(0)
++                          << " \t,\t " << fitFunc-.GetParameter(1) << " (+-) " << fitFunc->GetParError(1) <<std::endl <<std::endl;
+ #endif
+ 
+     // cleanUp
+@@ -523,7 +523,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
+       // ???????? DECIDE/FIX - incorparate the parameters given here better in the code ????????
+       // ???????? DECIDE/FIX - consider a different middle layer for the else condition ????????
+       // extrapolated cluster radius around CM position
+-#pragma message ("WARNING: Fix these parameters")
++//#pragma message ("WARNING: Fix these parameters")
+       if(avrgCM[clusterNow].getE() > 1) { fitPar0 = 236.7; fitPar1 = 9.11; hitLayerRatio = 22/2618.; }
+       else                              { fitPar0 = 226.5; fitPar1 = 10.3; hitLayerRatio = 22/2570.; }
+ 
+diff --git a/source/LumiCalReco/src/LumiCalClusterer_buildClusters_auxiliary.cpp b/source/LumiCalReco/src/LumiCalClusterer_buildClusters_auxiliary.cpp
+index 1331761..a8afd1c 100644
+--- a/source/LumiCalReco/src/LumiCalClusterer_buildClusters_auxiliary.cpp
++++ b/source/LumiCalReco/src/LumiCalClusterer_buildClusters_auxiliary.cpp
+@@ -1582,7 +1582,7 @@ int LumiCalClustererClass::engyInMoliereCorrections(MapIntCalHit const& calHitsC
+       superClusterCM			= superClusterCM_Tmp;
+       superClusterEngyInMoliere	= superClusterEngyInMoliere_Tmp;
+ 
+-      superClusterMolRatio = superClusterMolRatio_Tmp;
++      //superClusterMolRatio = superClusterMolRatio_Tmp;
+ 
+       rejectFlag = 0;
+       streamlog_out(DEBUG5) << "\t -- ACCEPTED new superCluster(s) -- " << std::endl;
+diff --git a/source/Tests/include/TestUtilities.hh b/source/Tests/include/TestUtilities.hh
+index 75de588..156bdf9 100644
+--- a/source/Tests/include/TestUtilities.hh
++++ b/source/Tests/include/TestUtilities.hh
+@@ -64,7 +64,6 @@ void fillLumiCal(GlobalMethodsClass& gmc, HitMap& hits, int phiID, int direction
+   for (int layer = 0; layer < 40; ++layer) {
+     for (int thisPad = phiID - nAddHits; thisPad <= phiID + nAddHits; ++thisPad) {
+       for (int thisR = centralR - nAddHits; thisR <= centralR + nAddHits; ++thisR) {
+-        auto* hit = new IMPL::CalorimeterHitImpl();
+ 
+         int thisPadID = thisPad;
+         // counting sense inverted in backward direction (because of LumiCalConstruction)
+@@ -101,6 +100,7 @@ void fillLumiCal(GlobalMethodsClass& gmc, HitMap& hits, int phiID, int direction
+           continue;
+         }
+ 
++        auto* hit = new IMPL::CalorimeterHitImpl();
+         hit->setCellID0(cellID0);
+         hit->setCellID1(cellID1);
+         hit->setEnergy(hitEnergy);
+diff --git a/source/Utilities/src/Occupancies.cpp b/source/Utilities/src/Occupancies.cpp
+index c4e0727..4b1f0e9 100644
+--- a/source/Utilities/src/Occupancies.cpp
++++ b/source/Utilities/src/Occupancies.cpp
+@@ -139,7 +139,7 @@ void drawOccupancy(std::string const& detectorName, BeamCalGeo const& bcg,
+   canv.Update();
+   canv.SaveAs(Form("%s_%sOccupancies.eps", detectorName.c_str(), name.c_str()));
+   canv.SaveAs(Form("%s_%sOccupancies.C", detectorName.c_str(), name.c_str()));
+-
++  gTQSender = nullptr;
+ }
