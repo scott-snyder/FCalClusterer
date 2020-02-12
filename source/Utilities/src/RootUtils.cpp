@@ -302,7 +302,7 @@ namespace RootUtils {
     }
 
     if (firstHist != -1) {
-      dynamic_cast<TH1*>(list->At(firstHist))->SetMaximum(maximum * maxScale);
+      dynamic_cast<TH1&>(*list->At(firstHist)).SetMaximum(maximum * maxScale);
       return maximum * maxScale;
     } else {
       std::cout << __func__ << " No Histograms found" << std::endl;

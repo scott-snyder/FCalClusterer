@@ -354,7 +354,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
 	// update the multi-layer CM position
 	//APS: BUGFIX This used to have the CM2 from the clusterNow2 loop above, instead of closestCluster
 	avrgCM[closestCluster->first].addToEnergy(thisCluster.getE());
-#pragma message( "(BP) temporary fix, need modify cluster CM method " )
+//#pragma message( "(BP) temporary fix, need modify cluster CM method " )
 	// 
 	double wt_closest = avrgCM[closestCluster->first].getWeight();
 	double wt_this = thisCluster.getWeight();
@@ -485,7 +485,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
 #if _CLUSTER_BUILD_DEBUG == 1
     streamlog_out(DEBUG3) << "\t -> yFitPar 0,1:  "
                           << fitFunc.GetParameter(0) << " (+-) " << fitFunc.GetParError(0)
-                          << " \t,\t " << fitFunc.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl <<std::endl;
+                          << " \t,\t " << fitFunc-.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl <<std::endl;
 #endif
 
     // cleanUp
@@ -523,7 +523,7 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
       // ???????? DECIDE/FIX - incorparate the parameters given here better in the code ????????
       // ???????? DECIDE/FIX - consider a different middle layer for the else condition ????????
       // extrapolated cluster radius around CM position
-#pragma message ("WARNING: Fix these parameters")
+//#pragma message ("WARNING: Fix these parameters")
       if(avrgCM[clusterNow].getE() > 1) { fitPar0 = 236.7; fitPar1 = 9.11; hitLayerRatio = 22/2618.; }
       else                              { fitPar0 = 226.5; fitPar1 = 10.3; hitLayerRatio = 22/2570.; }
 
