@@ -116,6 +116,7 @@ void BeamCalGeoCached::setPadsInRing()  {
   }//for all rings
 }//setPadsRings
 
+
 inline int BeamCalGeoCached::getPadsBeforeRing( int ring ) const {
   //  std::cout << "Ring " << ring << " val " << m_padsBeforeRing[ring]  << std::endl;
   return m_padsBeforeRing[ring];
