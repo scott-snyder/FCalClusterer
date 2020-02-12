@@ -139,7 +139,7 @@ void drawOccupancy(std::string const& detectorName, BeamCalGeo const& bcg,
   canv.Update();
   canv.SaveAs(Form("%s_%sOccupancies.eps", detectorName.c_str(), name.c_str()));
   canv.SaveAs(Form("%s_%sOccupancies.C", detectorName.c_str(), name.c_str()));
-
+  gTQSender = nullptr;
 }
 
 

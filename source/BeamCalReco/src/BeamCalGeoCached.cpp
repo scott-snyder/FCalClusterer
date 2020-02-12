@@ -97,7 +97,7 @@ inline double                BeamCalGeoCached::getBCZDistanceToIP() const {
 
 
 inline double                BeamCalGeoCached::getLayerZDistanceToIP(int layer) const {
-#pragma message "FIXME: make thickness of graphite shield to be read from GEAR"
+//#pragma message "FIXME: make thickness of graphite shield to be read from GEAR"
   const double graphiteShield_dZ = 100.;
   double lr_zdist(graphiteShield_dZ);
   lr_zdist+=m_BCPs.getLayerLayout().getDistance(layer);
@@ -116,6 +116,7 @@ void BeamCalGeoCached::setPadsInRing()  {
   }//for all rings
 }//setPadsRings
 
+
 inline int BeamCalGeoCached::getPadsBeforeRing( int ring ) const {
   //  std::cout << "Ring " << ring << " val " << m_padsBeforeRing[ring]  << std::endl;
   return m_padsBeforeRing[ring];
@@ -126,7 +127,7 @@ void BeamCalGeoCached::setPadsBeforeRing() {
   int nPads = 0;
   for (int ring = 0; ring <= m_rings; ++ring) {//we want the number of pads _before_ the ring
     m_padsBeforeRing[ring] = nPads;
-    nPads += getPadsInRing(ring);
+    nPads += m_padsPerRing[ring];
   }
   return;
 }
@@ -143,12 +144,12 @@ inline int BeamCalGeoCached::getPadsPerBeamCal() const {
 
 
 void BeamCalGeoCached::setPadsPerLayer() {
-  m_padsPerLayer = getPadsBeforeRing( getBCRings() );
+  m_padsPerLayer = m_padsBeforeRing[m_rings];
 }
 
 
 void BeamCalGeoCached::setPadsPerBeamCal() {
-  m_padsPerBeamCal = getPadsPerLayer() * getBCLayers();
+  m_padsPerBeamCal = m_padsPerLayer * m_layers;
 }
 
 
@@ -173,6 +174,6 @@ int BeamCalGeoCached::getFirstFullRing() const {
 
 void BeamCalGeoCached::setFirstFullRing() {
   int ring = 0;
-  while ( m_cutOut > getRadSegmentation()[ring] ) { ++ring; }
+  while ( m_cutOut > m_radSegmentation[ring] ) { ++ring; }
   m_firstFullRing = ring;
 }
