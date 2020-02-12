@@ -1582,7 +1582,7 @@ int LumiCalClustererClass::engyInMoliereCorrections(MapIntCalHit const& calHitsC
       superClusterCM			= superClusterCM_Tmp;
       superClusterEngyInMoliere	= superClusterEngyInMoliere_Tmp;
 
-      superClusterMolRatio = superClusterMolRatio_Tmp;
+      //superClusterMolRatio = superClusterMolRatio_Tmp;
 
       rejectFlag = 0;
       streamlog_out(DEBUG5) << "\t -- ACCEPTED new superCluster(s) -- " << std::endl;
