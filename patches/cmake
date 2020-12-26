@@ -1,6 +1,0 @@
-Bottom: 710d88efeaa302145d161455ada09f1fdec84677
-Top:    710d88efeaa302145d161455ada09f1fdec84677
-Author: scott snyder <sss@karma>
-Date:   2020-02-12 08:45:25 -0500
-
-Don't override installation path.
