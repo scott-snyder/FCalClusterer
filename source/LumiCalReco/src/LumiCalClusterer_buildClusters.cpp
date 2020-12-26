@@ -468,24 +468,24 @@ int LumiCalClustererClass::buildClusters(MapIntVCalHit const& calHits, MapIntCal
     // fit a straight line for each histogram, and store the fit results
     xLineFitCM[clusterNow].Fit("fitFunc","+CQ0");
     fitParamX.push_back(std::vector<double>(2,0.0));
-    fitParamX.back()[0] = fitFunc->GetParameter(0);
-    fitParamX.back()[1] = fitFunc->GetParameter(1);
+    fitParamX.back()[0] = fitFunc.GetParameter(0);
+    fitParamX.back()[1] = fitFunc.GetParameter(1);
 
 #if _CLUSTER_BUILD_DEBUG == 1
     streamlog_out(DEBUG3) << "\t -> xFitPar 0,1:  "
-                          << fitFunc->GetParameter(0) << " (+-) " << fitFunc->GetParError(0)
-                          << " \t,\t " << fitFunc->GetParameter(1) << " (+-) " << fitFunc->GetParError(1) <<std::endl;
+                          << fitFunc.GetParameter(0) << " (+-) " << fitFunc.GetParError(0)
+                          << " \t,\t " << fitFunc.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl;
 #endif
 
     yLineFitCM[clusterNow] . Fit("fitFunc","+CQ0");
     fitParamY.push_back(std::vector<double>(2,0.0));
-    fitParamY.back()[0] = fitFunc->GetParameter(0);
-    fitParamY.back()[1] = fitFunc->GetParameter(1);
+    fitParamY.back()[0] = fitFunc.GetParameter(0);
+    fitParamY.back()[1] = fitFunc.GetParameter(1);
 
 #if _CLUSTER_BUILD_DEBUG == 1
     streamlog_out(DEBUG3) << "\t -> yFitPar 0,1:  "
-                          << fitFunc->GetParameter(0) << " (+-) " << fitFunc->GetParError(0)
-                          << " \t,\t " << fitFunc-.GetParameter(1) << " (+-) " << fitFunc->GetParError(1) <<std::endl <<std::endl;
+                          << fitFunc.GetParameter(0) << " (+-) " << fitFunc.GetParError(0)
+                          << " \t,\t " << fitFunc-.GetParameter(1) << " (+-) " << fitFunc.GetParError(1) <<std::endl <<std::endl;
 #endif
 
     // cleanUp
