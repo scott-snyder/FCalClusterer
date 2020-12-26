@@ -101,6 +101,7 @@ void fillLumiCal(GlobalMethodsClass& gmc, HitMap& hits, int phiID, int direction
           continue;
         }
 
+        auto* hit = new IMPL::CalorimeterHitImpl();
         hit->setCellID0(cellID0);
         hit->setCellID1(cellID1);
         hit->setEnergy(hitEnergy);
