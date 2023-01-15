@@ -408,10 +408,10 @@ void BeamCalFitShower::estimateShowerPars(double &rc, double &phic, double &A0, 
   //phic = 2.4996;
   //std::cout << 25.6359 *m_BCG->getLayerZDistanceToIP(m_startLayer)/1000. << std::endl;
 
-  double esum(0.);
-  for (it_ep = m_spotPads.begin();it_ep != m_spotPads.end(); it_ep++){
-    esum+=(*it_ep)->totalEdep - (*it_ep)->bkgEdep;
-  }
+  //double esum(0.);
+  //for (it_ep = m_spotPads.begin();it_ep != m_spotPads.end(); it_ep++){
+  //  esum+=(*it_ep)->totalEdep - (*it_ep)->bkgEdep;
+  //}
 
   EdepProfile_t* epc = m_spotPads.at(0); // central pad profile
   double delt = 0.5*epc->padGeom->m_dR;
