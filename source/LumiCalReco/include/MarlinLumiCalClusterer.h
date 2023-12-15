@@ -72,7 +72,7 @@ typedef std::map < int , std::vector<int> >  MapIntVInt;
     std::string LumiRecoParticleColName ;
     double _BeamCrossingAngle;
     double _zLayerPhiOffset;
-    double _rMoliere,_minClusterEngy, _minHitEnergy, _logWeigthConstant;
+    double _rMoliere,_minClusterEngy, _minHitEnergy, _logWeightConstant;
     double _ElementsPercentInShowerPeakLayer, _MiddleEnergyHitBoundFrac;
     double _EnergyCalibConst;
     std::string _WeightingMethod;

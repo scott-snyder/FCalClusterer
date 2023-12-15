@@ -163,7 +163,7 @@ void GlobalMethodsClass::SetConstants( marlin::Processor* procPTR ) {
   GlobalParamD[Signal_to_GeV] = 1. / _lcalRecoPars->getFloatVal("EnergyCalibConst");
 
   // logarithmic constant for position reconstruction
-  GlobalParamD[LogWeightConstant] = _lcalRecoPars->getFloatVal("LogWeigthConstant");
+  GlobalParamD[LogWeightConstant] = _lcalRecoPars->getFloatVal("LogWeightConstant");
   
   GlobalParamD[MinHitEnergy] = toGev(_lcalRecoPars->getFloatVal("MinHitEnergy"));
   GlobalParamD[MiddleEnergyHitBoundFrac] = _lcalRecoPars->getFloatVal(  "MiddleEnergyHitBoundFrac" );
