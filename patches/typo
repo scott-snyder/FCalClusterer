@@ -4,3 +4,5 @@ Author: scott snyder <snyder@bnl.gov>
 Date:   2023-12-15 18:29:36 -0500
 
 Fix typo: LogWeigthConstant -> LogWeightConstant
+
+(Needs corresponding change in CLDConfig.)
