@@ -1,11 +1,10 @@
 {
   "version": 5,
-  "prev": "cf3d4045b6b3d9633601af7d7c9ef99db4790b9c",
-  "head": "b22972bea9b9cc844659fad5b7c692049f96d3ef",
+  "prev": "8bb6799813cd77c71c479304200f818baa993208",
+  "head": "8c6b2a10c354fb5e41c4a9b263ac8484d3f1ac74",
   "applied": [
     "typo",
-    "record",
-    "refresh-temp"
+    "record"
   ],
   "unapplied": [],
   "hidden": [],
@@ -14,10 +13,7 @@
       "oid": "d3861d346c07927773664b803f0ba50a4c8d7703"
     },
     "record": {
-      "oid": "f69b22aed15838395acb294ccd580210e109f99a"
-    },
-    "refresh-temp": {
-      "oid": "b22972bea9b9cc844659fad5b7c692049f96d3ef"
+      "oid": "8c6b2a10c354fb5e41c4a9b263ac8484d3f1ac74"
     }
   }
 }
