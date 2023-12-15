@@ -33,7 +33,7 @@ MarlinLumiCalClusterer::MarlinLumiCalClusterer() : Processor("MarlinLumiCalClust
 						   _rMoliere(16.),
 						   _minClusterEngy(2.),
 						   _minHitEnergy(5.e-6),
-						   _logWeigthConstant(6.),
+						   _logWeightConstant(6.),
 						   _ElementsPercentInShowerPeakLayer(0.03),
 						   _MiddleEnergyHitBoundFrac(0.01),
 						   _EnergyCalibConst(0.0105),
@@ -114,9 +114,9 @@ MarlinLumiCalClusterer::MarlinLumiCalClusterer() : Processor("MarlinLumiCalClust
   //---------------------------------------------------------
   // Processor Clustering Parameters
   //---------------------------------------------------------
-  registerProcessorParameter(  "LogWeigthConstant",
+  registerProcessorParameter(  "LogWeightConstant",
                                " Sets minimum for logarithmic energy weights",
-                               _logWeigthConstant,
+                               _logWeightConstant,
 			       6. );
   registerProcessorParameter(  "ZLayerPhiOffset",
                                " Relative offset of LCal z-layers [deg] default is half of the phi sector size",
