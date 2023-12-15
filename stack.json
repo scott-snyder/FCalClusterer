@@ -1,15 +1,19 @@
 {
   "version": 5,
-  "prev": "4fd13c5d10b1e09035d957ddde7eee9d6608ae12",
-  "head": "d3861d346c07927773664b803f0ba50a4c8d7703",
+  "prev": "ea654134e0c86fcc676a2a278a27de24c078d1a0",
+  "head": "f69b22aed15838395acb294ccd580210e109f99a",
   "applied": [
-    "typo"
+    "typo",
+    "record"
   ],
   "unapplied": [],
   "hidden": [],
   "patches": {
     "typo": {
       "oid": "d3861d346c07927773664b803f0ba50a4c8d7703"
+    },
+    "record": {
+      "oid": "f69b22aed15838395acb294ccd580210e109f99a"
     }
   }
 }

@@ -1,0 +1,11 @@
+Bottom: 064011ff39089c8bd0dd86d9bdd4299a9c5575aa
+Top:    064011ff39089c8bd0dd86d9bdd4299a9c5575aa
+Author: scott snyder <snyder@bnl.gov>
+Date:   2023-12-15 18:42:29 -0500
+
+Always record the output collection, even if it is empty.
+
+The output code decides what to write based on the contents of the
+first event.  If we don't always record the collection, then it can
+either be missing in the output, or we can get crashes when the output
+code tries to access a nonexistent collection.
