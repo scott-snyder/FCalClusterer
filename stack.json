@@ -1,12 +1,11 @@
 {
   "version": 5,
-  "prev": "85fd1f15ec1c37c91b2c24eb14cafc14f9416b2c",
-  "head": "01b0799bb02f2c754d764aa2f7f6b31bf795694e",
+  "prev": "b7e0fa058046c7607aa47f793008b3211ff9b738",
+  "head": "0ae7644daef6a9cde72ac3aa042649975ab4763d",
   "applied": [
     "typo",
     "record",
-    "gitignore",
-    "refresh-temp"
+    "gitignore"
   ],
   "unapplied": [],
   "hidden": [],
@@ -18,10 +17,7 @@
       "oid": "8c6b2a10c354fb5e41c4a9b263ac8484d3f1ac74"
     },
     "gitignore": {
-      "oid": "7177ffa6a50a9208ec62909b49eb20eec13547b2"
-    },
-    "refresh-temp": {
-      "oid": "01b0799bb02f2c754d764aa2f7f6b31bf795694e"
+      "oid": "0ae7644daef6a9cde72ac3aa042649975ab4763d"
     }
   }
 }
