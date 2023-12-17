@@ -1,13 +1,12 @@
 {
   "version": 5,
-  "prev": "8c8fef862ad2ed5a9fb763257c0601489d0cb514",
-  "head": "d3861d346c07927773664b803f0ba50a4c8d7703",
+  "prev": "5779351d294d1e0eb49b6ca179b5810b112d8ca4",
+  "head": "8c6b2a10c354fb5e41c4a9b263ac8484d3f1ac74",
   "applied": [
-    "typo"
-  ],
-  "unapplied": [
+    "typo",
     "record"
   ],
+  "unapplied": [],
   "hidden": [],
   "patches": {
     "typo": {
