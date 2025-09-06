@@ -32,6 +32,8 @@
 #include <utility>
 #include <vector>
 
+using namespace lcio;
+
 // IWYU pragma: no_include <bits/shared_ptr.h>
 // IWYU pragma: no_include <ext/alloc_traits.h>
 

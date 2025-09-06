@@ -58,14 +58,14 @@ class BeamCalClusterReco : public marlin::Processor {
   
   /** Called for every run.
    */
-  virtual void processRunHeader( LCRunHeader* run ) ;
+  virtual void processRunHeader( lcio::LCRunHeader* run ) ;
   
   /** Called for every event - the working horse.
    */
-  virtual void processEvent( LCEvent * evt ) ; 
+  virtual void processEvent( lcio::LCEvent * evt ) ; 
   
   
-  virtual void check( LCEvent * evt ) ; 
+  virtual void check( lcio::LCEvent * evt ) ; 
   
   
   /** Called after data processing for clean up.
@@ -126,11 +126,11 @@ class BeamCalClusterReco : public marlin::Processor {
 
 private:
 
-  void findOriginalMCParticles(LCEvent *evt);
+  void findOriginalMCParticles(lcio::LCEvent *evt);
   void fillEfficiencyObjects(const std::vector<BCRecoObject*>& RecoedObjects);
-  void readSignalHits(LCEvent* evt, LCCollection* colBCal, BCPadEnergies& padEnergiesLeft, BCPadEnergies& padEnergiesRight,
+  void readSignalHits(lcio::LCEvent* evt, lcio::LCCollection* colBCal, BCPadEnergies& padEnergiesLeft, BCPadEnergies& padEnergiesRight,
                       double& depositedEnergy, double& maxDeposit, int& maxLayer);
-  LCCollection* createCaloHitCollection(LCCollection* simCaloHitCollection) const;
+  lcio::LCCollection* createCaloHitCollection(lcio::LCCollection* simCaloHitCollection) const;
 
   void printBeamCalEventDisplay(BCPadEnergies& padEnergies_left, BCPadEnergies& padEnergies_right,
 				int maxLayer, double maxDeposit, double depositedEnergy,
