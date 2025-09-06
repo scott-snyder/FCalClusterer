@@ -54,7 +54,7 @@ typedef std::map < int , std::vector<int> >  MapIntVInt;
     virtual void init() ;
 
     // pre-run actions - Called for every run
-    virtual void processRunHeader( LCRunHeader * run  ) ;
+    virtual void processRunHeader( lcio::LCRunHeader * run  ) ;
 
     // main actions in each event -Called for every event - the working horse.
     virtual void processEvent( EVENT::LCEvent * evt ) ;
@@ -95,14 +95,14 @@ typedef std::map < int , std::vector<int> >  MapIntVInt;
     void TryMarlinLumiCalClusterer(EVENT::LCEvent * evt);
 
     void CreateClusters(std::map<int, MapIntPClusterClass>& clusterClassMapP, EVENT::LCEvent* evt);
-    std::tuple<ClusterImpl*, ReconstructedParticleImpl*> getLCIOObjects(LCCluster const& clusterInfo) const;
+    std::tuple<lcio::ClusterImpl*, lcio::ReconstructedParticleImpl*> getLCIOObjects(LCCluster const& clusterInfo) const;
     void writeRootInfo(EVENT::LCEvent* evt);
 
     inline double sqr( double a){ return a*a;};
     inline float sqr( float a){ return a*a;};
     inline int sqr( int a){ return a*a;};
 
-    void storeMCParticleInfo( LCEvent *evt, int clusterInFlag  );
+    void storeMCParticleInfo( lcio::LCEvent *evt, int clusterInFlag  );
 
   };
 
