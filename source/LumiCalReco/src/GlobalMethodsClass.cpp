@@ -35,8 +35,6 @@
 #include <IMPL/ReconstructedParticleImpl.h>
 #include <LCIOSTLTypes.h>
 
-using streamlog::MESSAGE;
-
 #include <TGeoMatrix.h>
 
 #include <algorithm>
@@ -50,6 +48,9 @@ using streamlog::MESSAGE;
 #include <string>
 #include <utility>
 #include <vector>
+
+using streamlog::MESSAGE;
+using namespace lcio;
 
 // IWYU pragma: no_include <bits/shared_ptr.h>
 
